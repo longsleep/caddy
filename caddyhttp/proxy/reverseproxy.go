@@ -256,8 +256,8 @@ func NewSingleHostReverseProxy(target *url.URL, without string, keepalive int, t
 	} else if target.Scheme == "quic" {
 		rp.Transport = &http3.RoundTripper{
 			QuicConfig: &quic.Config{
-				HandshakeTimeout: defaultCryptoHandshakeTimeout,
-				KeepAlive:        true,
+				HandshakeIdleTimeout: defaultCryptoHandshakeTimeout,
+				KeepAlive:            true,
 			},
 		}
 	} else if keepalive != http.DefaultMaxIdleConnsPerHost || strings.HasPrefix(target.Scheme, "srv") {
